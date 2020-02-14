@@ -1,0 +1,23 @@
+USE [LGRMS]
+GO
+/****** Object:  StoredProcedure [dbo].[SP_Show_Tansaction]    Script Date: 02/05/2020 13:08:25 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+--SP_Show_TansactionNew '2076-09-01','2076-09-29','3'
+ alter proc [dbo].[SP_Show_Tansaction]            
+@datenep1 varchar(12),
+@datenep2 varchar(12),
+@officeID int             
+as              
+            
+ Select ReceiptNo as 'रसिद नं',DateNep as 'मिति',            
+ payeename as 'बुझाउनेको नाम',payeeaddrress as 'बुझाउनेको ठेगाना', SUM(Total) as 'जम्मा'         
+ from TransactionDetails where  datenep between @datenep1 and    @datenep2
+ and 
+ receipttype=1 and 
+ OfficeID=@officeID     
+             
+ Group by ReceiptNo,DateNep,payeename,payeeaddrress order by ReceiptNo desc
+ 
