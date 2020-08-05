@@ -22,8 +22,8 @@ $data["status"]="Successful";
 
 #new query to get notify status
 $query_new="SELECT notify FROM client where clientid like '$id' order by notify_date desc ";
-$result_new=mysqli_query($con,$query_new);
-if(mysqli_num_rows($result_new)>0){
+$result_new=sqlsrv_query($con,$query_new);
+if(sqli_num_rows($result_new)>0){
     $row_new=mysqli_fetch_assoc($result_new);
     $notify=$row_new["notify"];
     $data["notify"]="$notify";
